@@ -1,0 +1,43 @@
+FROM php:fpm-alpine
+
+ENV TZ=America/Sao_Paulo
+
+WORKDIR /var/www/html
+RUN chmod 777 -R /var/www/html
+
+RUN apk update && apk upgrade
+
+RUN apk add --no-cache \
+        tzdata \
+        git \
+        unzip \
+        libzip-dev \
+        libpng-dev \
+        jpeg-dev \
+        curl \
+        curl-dev \
+        freetype-dev \
+        unixodbc \
+        unixodbc-dev \
+        nano \
+        supervisor \
+        nginx \
+        cifs-utils
+
+RUN cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+RUN docker-php-ext-install curl
+RUN docker-php-ext-configure pcntl 
+RUN docker-php-ext-install pcntl
+
+RUN rm -rf /var/cache/apk/*
+RUN mkdir -p /storage/cvs
+RUN mkdir -p /var/log/supervisor
+RUN chmod 777 -R /storage/cvs
+RUN chmod 777 -R /var/log/supervisor
+
+RUN mv /usr/local/etc/php/conf.d/docker-php-ext-pcntl.ini /usr/local/etc/php/conf.d/docker-php-ext-pcntl.ini.disabled

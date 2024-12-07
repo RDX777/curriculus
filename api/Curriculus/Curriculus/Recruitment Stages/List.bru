@@ -1,0 +1,19 @@
+meta {
+  name: List
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/curriculus/recruitment-stages/list?active=all
+  body: none
+  auth: none
+}
+
+params:query {
+  active: all
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

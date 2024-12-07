@@ -1,0 +1,19 @@
+meta {
+  name: Get Vacancy
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/curriculus/vacancies/get-vacancy?uuid=d3fe11ba-a1e5-11ef-af2d-0242ac120002
+  body: none
+  auth: none
+}
+
+params:query {
+  uuid: d3fe11ba-a1e5-11ef-af2d-0242ac120002
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer AW8ZtFxooMqy36ZK523la2J2s4W5Nh8NpjqQz2Z55ab9b844")
+}

@@ -1,0 +1,8 @@
+git_comits.txt
+docker-comands.txt
+.env
+.env.prod
+supervisord.conf
+footComponent.tsx
+headComponent.tsx
+.next

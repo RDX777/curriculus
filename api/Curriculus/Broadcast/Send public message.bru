@@ -1,0 +1,21 @@
+meta {
+  name: Send public message
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}/broadcasting/send-for-all
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "message": "Mensagem de exemplo publica"
+  }
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

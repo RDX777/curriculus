@@ -1,0 +1,19 @@
+meta {
+  name: Get previous vacancies
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/curriculus/candidates/get-previous-vacancies?candidate-id=1
+  body: none
+  auth: none
+}
+
+params:query {
+  candidate-id: 1
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

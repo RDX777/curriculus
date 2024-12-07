@@ -1,0 +1,15 @@
+meta {
+  name: n8n Analizator
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://n8n.mdgintermediacoes.com.br/webhook-test/42177a4a-b012-4ee6-b2cb-0f811c5485c2
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  cv: @file(C:\Users\anderson.tome\Downloads\Sem título 1.docx)
+}

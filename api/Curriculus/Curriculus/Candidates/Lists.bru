@@ -1,0 +1,15 @@
+meta {
+  name: Lists
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{url}}/curriculus/candidates/list
+  body: none
+  auth: none
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

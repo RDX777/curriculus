@@ -1,0 +1,44 @@
+[unix_http_server]
+file=/var/run/supervisor.sock
+chmod=0770
+chown=nobody:nogroup
+
+[supervisord]
+logfile=/var/log/supervisor/supervisord.log ; main log file; default is $CWD/supervisord.log
+nodaemon=true
+user=root
+
+[program:nginx]
+command = nginx -c /etc/nginx/nginx.conf -g 'daemon off;'
+user = root
+autostart = true
+
+[program:php-fpm]
+command=docker-php-entrypoint php-fpm
+user=root
+autostart=true
+nodaemon=true
+autorestart=true
+
+[program:reverb]
+command=/usr/local/bin/php /var/www/html/artisan reverb:start --host=0.0.0.0 --port=6001
+user=root
+autostart=true
+nodaemon=true
+autorestart=true
+
+[program:queue]
+command=/usr/local/bin/php /var/www/html/artisan queue:work --timeout=0
+user=root
+autostart=true
+nodaemon=true
+autorestart=true
+redirect_stderr=true
+stdout_logfile=/var/www/html/storage/logs/queue-worker.log
+
+[program:mount]
+command=sh -c "mount -t cifs //seu.mapeamento.de.rede /storage/cvs -o username={user},password={password},domain={domain},uid=www-data,gid=www-data,file_mode=0775,dir_mode=0775"
+user=root
+autostart=true
+nodaemon=true
+autorestart=false

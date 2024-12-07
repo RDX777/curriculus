@@ -1,0 +1,19 @@
+meta {
+  name: Search By Uuid
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{url}}/curriculus/resume/search-uuid?uuid=7a82526c-a69d-11ef-af2d-0242ac120002
+  body: none
+  auth: none
+}
+
+params:query {
+  uuid: 7a82526c-a69d-11ef-af2d-0242ac120002
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

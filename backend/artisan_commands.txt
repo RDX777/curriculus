@@ -1,0 +1,19 @@
+php artisan db:seed --class=DatabasePermission
+
+php artisan cache:clear
+
+php artisan route:clear
+
+php artisan migrate:fresh --path=/database/migrations/Recruitment --database=recruitments
+php artisan migrate:fresh --path=/database/migrations/Application --database=application
+
+php artisan db:seed --class=DatabaseUsers
+
+php artisan db:seed --class=DatabaseActions
+php artisan db:seed --class=DatabaseMiddlewares
+
+php artisan tinker
+\App\Models\Recruitment\Vacancy::factory()->count(1)->create();
+\App\Models\Recruitment\Candidate::factory()->count(2)->create();
+\App\Models\Recruitment\Resume::factory()->count(4)->create();
+\App\Models\Recruitment\ResumeStageHistory::factory()->count(20)->create();

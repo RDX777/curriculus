@@ -1,0 +1,22 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/broadcasting/auth
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "socket_id": "771326434.47286149",
+    "channel_name": "private-channel.3"
+  }
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

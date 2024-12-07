@@ -1,0 +1,15 @@
+meta {
+  name: Download Resume
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{url}}/curriculus/candidates/download-resume/8vAUo3jwjCdNzp3Fz4pI2B3nULnEXhOdSnbFBxGT.pdf
+  body: none
+  auth: none
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

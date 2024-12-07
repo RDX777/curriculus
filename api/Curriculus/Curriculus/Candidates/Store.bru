@@ -1,0 +1,43 @@
+meta {
+  name: Store
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{url}}/curriculus/candidates/store-candidate
+  body: multipartForm
+  auth: none
+}
+
+body:json {
+  {
+    "candidateId": 1,
+    "vacancyUuid": "dd420995-cb9c-3eed-b0f0-adf409e27c8a",
+    "recruitmentStageId": 12,
+    "resumeId": 1,
+    "observation": "Observação",
+    "startTime": "2024-10-31T20:20",
+    "endTime": "2024-10-31T20:21"
+  }
+}
+
+body:multipart-form {
+  vacancie: 58c88ba6-a182-11ef-af2d-0242ac120002
+  name: Nome do Abençoado
+  cpf: 32810560838
+  email: asd@asd.com
+  phone: 19999999999
+  cep: 99999999
+  professionalSummary: professionalSummary
+  academicBackground: academicBackground
+  professionalExperience: professionalExperience
+  additionalInformation: additionalInformation
+  consent: true
+  indicatedBy: Indicado por
+  file: @file(C:\Users\anderson.tome\Downloads\24606A - Orçamento MDG Workstation Placa de Video P5000.pdf)
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

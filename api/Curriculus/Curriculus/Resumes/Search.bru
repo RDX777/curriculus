@@ -1,0 +1,19 @@
+meta {
+  name: Search
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{url}}/curriculus/resume/search?item=36291084821
+  body: none
+  auth: none
+}
+
+params:query {
+  item: 36291084821
+}
+
+script:pre-request {
+  req.setHeader("Authorization", "Bearer {{token}}")
+}

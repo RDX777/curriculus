@@ -1,0 +1,29 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/auth/login
+  body: json
+  auth: none
+}
+
+vars:pre-request {
+  username: nengue
+  password: d05f84f31d804550f4477ae1e21486a233363eaa8a9c06c2876adda29423550d
+  groupToBring: curriculus
+}
+
+script:pre-request {
+  req.setBody({
+    "username": "{{username}}",
+    "password": "{{password}}",
+    "groupToBring": "{{groupToBring}}"
+  })
+}
+
+script:post-response {
+  bru.setVar("token",res.body.data.token)
+}

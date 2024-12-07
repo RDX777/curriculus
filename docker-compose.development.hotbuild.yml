@@ -1,0 +1,29 @@
+services:
+  base: &base
+    build:
+      context: ./
+      dockerfile: docker/backend/Dockerfile.Development
+    restart: always
+    working_dir: /application
+    volumes:
+      - "./backend:/application"
+      - "/media/curriculus:/storage/app"
+    networks:
+      - curriculus-net
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: "100m"
+
+  php-fpm:
+    <<: *base
+    ports:
+      - "6001:6001"
+      - "9000:9000"
+    command: ["/application/start.sh"]
+
+networks:
+  curriculus-net:
+    name: curriculus-net
+    driver: bridge

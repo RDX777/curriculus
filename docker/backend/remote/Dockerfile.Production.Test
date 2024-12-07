@@ -1,0 +1,22 @@
+FROM rdx7777/laravel11-prod
+
+WORKDIR /var/www/html
+
+COPY ./configs/php-fpm/php.ini /usr/local/etc/php/php.ini
+
+COPY ./configs/supervisord/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# COPY ./backend .
+
+# RUN rm ./.env
+# COPY ./backend/.env.prod ./.env
+
+RUN git config --global --add safe.directory /var/www/html
+
+RUN chmod -R 777 /var/www/html
+RUN chown -R www-data:www-data /var/www/html
+
+EXPOSE 6001
+EXPOSE 9001
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
